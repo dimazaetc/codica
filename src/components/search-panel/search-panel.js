@@ -1,7 +1,7 @@
 import { InputGroup, FormControl, Button, Container } from "react-bootstrap";
 import "./search-panel.css";
 
-import logo from "./logo.png";
+import logo from "../../images/search-panel-img/logo.png";
 const SearchPanel = ({
   value,
   clearInput,
@@ -27,7 +27,7 @@ const SearchPanel = ({
             placeholder={placeholder}
             onChange={onChange}
             value={value}
-            inputClick={inputClick}
+            onClick={inputClick}
             aria-label="Default"
             autoComplete="off"
             aria-describedby="inputGroup-sizing-default"

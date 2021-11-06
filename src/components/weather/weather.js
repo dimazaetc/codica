@@ -9,11 +9,14 @@ import HealpSearch from "../healp-search/healp-search";
 import SearchPanel from "../search-panel";
 import WeatherCart from "../weather-card/weather-card";
 import Search from "../search";
-import getFetch from "../fetch";
+import getFetch from "../../fetch";
 import { useSelector } from "react-redux";
-
 import "./weather.css";
+
 const Weather = () => {
+  const reduxData = useSelector((state) => state.weather.weather);
+  const countriesData = useSelector((state) => state.weather.countries);
+  const dispatch = useDispatch();
   const [getCity, setGetCity] = useState("");
   const [city, setCity] = useState("");
   const [error, setError] = useState(false);
@@ -21,17 +24,14 @@ const Weather = () => {
   const [update, setUpdate] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
 
-  const dispatch = useDispatch();
   const fetchUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c7b6c0009fd6b830eab8c0a0273eeb99`;
-  if (localStorage.getItem("fetch") === null)
-    localStorage.setItem("fetch", "something");
 
   const localItem = [localStorage.getItem("fetch")];
+  localStorage.setItem("fetch", "item");
   const forLocal = localItem[0].split(",");
-  var unique = forLocal.filter((v, i, a) => a.indexOf(v) === i);
+  const unique = forLocal.filter((v, i, a) => a.indexOf(v) === i);
   localStorage.setItem("fetch", unique);
-  const reduxData = useSelector((state) => state.weather.weather);
-  const countriesData = useSelector((state) => state.weather.countries);
+
   const filteredWeather = reduxData.filter((country) => {
     let newCountry = country.name;
     return newCountry.toLowerCase().includes(value.toLowerCase());
@@ -40,6 +40,7 @@ const Weather = () => {
     let newCountry = country.Country;
     return newCountry.toLowerCase().includes(getCity.toLowerCase());
   });
+
   const clearInput = () => {
     setCity(getCity);
     setGetCity("");
@@ -58,11 +59,18 @@ const Weather = () => {
     setGetCity(country);
     setIsOpen(true);
   };
+  const setCityFunc = (event) => {
+    setGetCity(event.target.value);
+  };
+
+  const setValueFunc = (event) => {
+    setValue(event.target.value);
+  };
 
   // UPDATE ITEM F
   const updateItem = (item, name) => {
     const newURL2 = `http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=c7b6c0009fd6b830eab8c0a0273eeb99`;
-    var index = reduxData.indexOf(item);
+    const index = reduxData.indexOf(item);
     if (index !== -1) {
       fetch(newURL2)
         .then((res) => (res.ok ? res : Promise.reject(res)))
@@ -70,7 +78,8 @@ const Weather = () => {
         .then((data) => {
           reduxData[index] = data;
           dispatch(updateWeatherCity(reduxData));
-        });
+        })
+        .catch(() => setError(true));
     }
     setUpdate(true);
   };
@@ -79,14 +88,15 @@ const Weather = () => {
   }, [update]);
   // FETCH
   useEffect(() => {
-    getFetch(fetchUrl, localItem, setError, dispatch, getWeatherCity);
+    if (city !== "")
+      getFetch(fetchUrl, localItem, setError, dispatch, getWeatherCity);
   }, [city]); // eslint-disable-line
   // LOAD WINDOW
   useEffect(() => {
     for (let i = 0; i < unique.length; i++) {
       const item = unique[i];
       const fetchUrl2 = `http://api.openweathermap.org/data/2.5/weather?q=${item}&appid=c7b6c0009fd6b830eab8c0a0273eeb99`;
-      if (unique[i] !== "")
+      if (unique[i] !== "" && unique[i] !== "item")
         getFetch(fetchUrl2, localItem, setError, dispatch, getWeatherCity);
     }
   }, []); // eslint-disable-line
@@ -118,7 +128,7 @@ const Weather = () => {
         <SearchPanel
           id="input"
           clearInput={clearInput}
-          onChange={(event) => setGetCity(event.target.value)}
+          onChange={setCityFunc}
           value={getCity}
           inputClick={inputClick}
           placeholder={error ? "Enter correct value" : null}
@@ -128,10 +138,7 @@ const Weather = () => {
         ) : null}
       </div>
       <form>
-        <Search
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-        />
+        <Search value={value} onChange={setValueFunc} />
       </form>
       <div className="cart_wrapper">{cards}</div>
     </div>

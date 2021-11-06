@@ -1,9 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
-import Temp from "./city-weather-img/temp.png";
-import Cloud from "./city-weather-img/cloud.png";
-import Update from "./city-weather-img/update.png";
-import Wind from "./city-weather-img/wind.png";
+import Temp from "../../images/city-weather-img/temp.png";
+import Cloud from "../../images/city-weather-img/cloud.png";
+import Update from "../../images/city-weather-img/update.png";
+import Wind from "../../images/city-weather-img/wind.png";
 
 import "./city-weather.css";
 const CityWeather = ({

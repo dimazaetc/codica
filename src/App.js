@@ -10,7 +10,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Weather} />
-          <Route path="/" component={CityWeatherPage} />
+          <Route path="/weather" component={CityWeatherPage} />
         </Switch>
       </BrowserRouter>
     </Provider>

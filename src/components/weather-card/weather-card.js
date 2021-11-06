@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Card, Button, CloseButton } from "react-bootstrap";
-import Temperature from "./temperature.png";
-import Cloud from "./cloud.png";
-import Wind from "./wind.png";
+import Temperature from "../../images/weather-card-img/temperature.png";
+import Cloud from "../../images/weather-card-img/cloud.png";
+import Wind from "../../images/weather-card-img/wind.png";
 import "./weather-card.css";
 const WeatherCart = ({
   city,
@@ -19,6 +19,7 @@ const WeatherCart = ({
   const toggleTemp = () => {
     setTemp(!temp);
   };
+
   return (
     <Card style={{ width: "20rem" }}>
       <Card.Body>
@@ -45,7 +46,7 @@ const WeatherCart = ({
             Refresh
           </Button>
           <Button variant="info">
-            <NavLink to={`/${id}`}>More Info</NavLink>
+            <NavLink to={`/weather/${id}`}>More Info</NavLink>
           </Button>
         </div>
       </Card.Body>

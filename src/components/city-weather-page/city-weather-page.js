@@ -1,9 +1,8 @@
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import CityWeather from "../city-weather";
 import "./city-weather-page.css";
-const CityWeatherPage = () => {
+const CityWeatherPage = (props) => {
   const reduxData = useSelector((state) => state.weather.weather);
   const currentLocation = window.location;
   const urlCity = `${currentLocation}`.split("/");
@@ -12,8 +11,8 @@ const CityWeatherPage = () => {
   const cityObj = cityName[0];
   return (
     <div key={new Date().getTime()} className="city_weather_page">
-      <Button variant="dark">
-        <Link to={`/`}> Go Back</Link>
+      <Button onClick={() => props.history.goBack()} variant="dark">
+        Go Back
       </Button>
       {cityObj ? (
         <CityWeather
