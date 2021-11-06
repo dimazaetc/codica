@@ -1,0 +1,39 @@
+.form-control::placeholder {
+  color: red;
+}
+.form_wrapper {
+  padding: 20px 0;
+  height: 400px;
+  background: url("./background.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.logo_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo_wrapper img {
+  height: 100px;
+}
+.logo_wrapper h1 {
+  font-size: 64px;
+  color: aliceblue;
+  text-shadow: 1px 1px bisque;
+}
+.input_group {
+  margin-top: 40px;
+}
+@media (max-width: 576px) {
+  .logo_wrapper h1 {
+    font-size: 24px;
+  }
+  #main_input {
+    display: block;
+  }
+  #main_input input,
+  #main_input button {
+    width: 100%;
+  }
+}

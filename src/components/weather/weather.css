@@ -1,0 +1,13 @@
+.cart_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.add_item {
+  display: block;
+  margin: 0 auto;
+  font-size: 42px;
+}
+.search_wrapper_help {
+  position: relative;
+}

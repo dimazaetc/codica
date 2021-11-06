@@ -1,0 +1,25 @@
+.city_weather_wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.city_weather_wrapper h1 {
+  text-align: center;
+  font-size: 64px;
+}
+.city_weather_wrapper {
+  font-weight: 600;
+  text-shadow: 1px 1px white;
+  font-size: 24px;
+}
+.city_weather_wrapper img {
+  width: 50px;
+  height: 50px;
+}
+.city_weather_wrapper-row {
+  margin-top: 80px;
+}
+.update_img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
