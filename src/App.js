@@ -6,6 +6,14 @@ import { Route, BrowserRouter, Switch } from "react-router-dom";
 
 function App() {
   console.log(123);
+  console.log(123);
+
+  console.log(123);
+
+  console.log(123);
+
+  console.log(123);
+
   return (
     <Provider store={store}>
       <BrowserRouter>
